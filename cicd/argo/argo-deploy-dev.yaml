@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     path: ops/overlays/dev
-    repoURL: https://github.com/andreasevers/go-sample-app-ops.git
+    repoURL: https://github.com/springone-tour-2020-cicd/go-sample-app-ops.git
     targetRevision: HEAD
   syncPolicy:
     automated: {}

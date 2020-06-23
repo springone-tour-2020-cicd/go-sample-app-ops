@@ -25,14 +25,14 @@ spec:
         cd ops/overlays/dev
         yq m -i -x kustomization.yaml - <<EOD
         images:
-          - name: andreasevers/go-sample-app  # used for Kustomize matching
+          - name: springone-tour-2020-cicd/go-sample-app  # used for Kustomize matching
             newTag: $(params.TAG)
         EOD
   - name: git-commit
     image: gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/git-init:v0.12.1
     workingDir: $(workspaces.source.path)
     script: |
-      git remote set-url origin https://andreasevers:${GITHUB_TOKEN}@github.com/andreasevers/go-sample-app-ops.git
+      git remote set-url origin https://springone-tour-2020-cicd:${GITHUB_TOKEN}@github.com/springone-tour-2020-cicd/go-sample-app-ops.git
       git config user.name build-bot
       git config user.email build-bot@bots.bot
       git checkout -b temp-branch
