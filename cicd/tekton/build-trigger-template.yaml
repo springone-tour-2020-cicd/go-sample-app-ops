@@ -16,13 +16,20 @@ spec:
             persistentvolumeclaim:
               claimName: workspace-pvc
         params:
-          - name: image
-            value: $(params.IMAGE)
           - name: repo-url
             value: $(params.REPO_URL)
           - name: revision
             value: $(params.REVISION)
         serviceAccountName: build-bot
+        resources:
+          - name: build-image
+            resourceRef:
+              name: buildpacks-app-image
+        podTemplate:
+          volumes:
+            - name: buildpacks-cache
+              persistentVolumeClaim:
+                claimName: buildpacks-cache-pvc
   params:
     - name: REPO_URL
       description: The Git repository url to build and deploy.

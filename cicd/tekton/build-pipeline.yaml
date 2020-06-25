@@ -10,8 +10,6 @@ spec:
     - name: revision
       type: string
       description: The Git revision to clone.
-    - name: image
-      description: reference of the image to build
   workspaces:
     - name: shared-workspace
       description: This workspace will receive the cloned git repo and be passed to the next Task.
@@ -53,7 +51,7 @@ spec:
           value: go-sample-app
     - name: build-image
       taskRef:
-        name: kaniko
+        name: buildpacks-v3
       runAfter:
         - fetch-repository
         - lint
@@ -62,23 +60,14 @@ spec:
         - name: source
           workspace: shared-workspace
       params:
-        - name: IMAGE
-          value: $(params.image)
-    - name: verify-digest
-      runAfter:
-        - build-image
-      params:
-        - name: digest
-          value: $(tasks.build-image.results.IMAGE-DIGEST)
-      taskSpec:
-        params:
-          - name: digest
-        steps:
-          - name: bash
-            image: ubuntu
-            script: |
-              echo $(params.digest)
-              case .$(params.digest) in
-                ".sha"*) exit 0 ;;
-                *)       echo "Digest value is not correct" && exit 1 ;;
-              esac
+        - name: BUILDER_IMAGE
+          value: gcr.io/paketo-buildpacks/builder:base-platform-api-0.3
+        - name: CACHE
+          value: buildpacks-cache
+      resources:
+        outputs:
+          - name: image
+            resource: build-image
+  resources:
+    - name: build-image
+      type: image
