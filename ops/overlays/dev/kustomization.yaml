@@ -5,6 +5,6 @@ resources:
   - ../../base/service.yaml
 namespace: dev
 images:
-  - name: springone-tour-2020-cicd/go-sample-app # used for Kustomize matching
+  - name: ciberkleid/go-sample-app # used for Kustomize matching
     newTag: 1.0.1
 namePrefix: dev-

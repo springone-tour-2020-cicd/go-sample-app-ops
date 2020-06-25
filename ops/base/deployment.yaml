@@ -18,7 +18,7 @@ spec:
         app: go-sample-app
     spec:
       containers:
-      - image: springone-tour-2020-cicd/go-sample-app:1.0.1
+      - image: ciberkleid/go-sample-app:1.0.1
         name: go-sample-app
         resources: {}
 status: {}

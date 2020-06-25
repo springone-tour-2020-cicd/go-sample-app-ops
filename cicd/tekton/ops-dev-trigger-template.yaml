@@ -19,7 +19,7 @@ spec:
       - name: tag
         value: $(params.tag)
       - name: repo-url
-        value: https://github.com/springone-tour-2020-cicd/go-sample-app-ops.git
+        value: https://github.com/ciberkleid/go-sample-app-ops.git
       - name: revision
         value: master
       - name: github-token-secret
