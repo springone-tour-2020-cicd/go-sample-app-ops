@@ -6,7 +6,7 @@ spec:
   builder:
     name: paketo-builder
     kind: Builder
-  serviceAccount: build-bot
+  serviceAccount: kpack-bot
   #cacheSize: "1.5Gi"
   source:
     git:
